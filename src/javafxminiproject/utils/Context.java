@@ -5,15 +5,11 @@
  */
 package javafxminiproject.utils;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafxminiproject.MyFirstApplication;
 import javafxminiproject.model.User;
+import javafxminiproject.view.ParentScreenFactory;
+import javafxminiproject.view.ScreenEnum;
 
 /**
  *
@@ -26,19 +22,10 @@ public class Context {
 
     public static Stage getWeightingScreen() {
         if(weightingScreen==null){
-            try {
-                Parent root = FXMLLoader.load(MyFirstApplication.class.getResource("FXMLQuickWeighting.fxml"));
-                
-                Scene scene = new Scene(root);
-                
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                
-                weightingScreen = stage;
-            } catch (IOException ex) {
-                Logger.getLogger(Context.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+            Scene quickWheithingScreenScene = ParentScreenFactory.getInstance().getParentScreen(ScreenEnum.QUICK_WEIGHTING);
+            Stage stage = new Stage();
+            stage.setScene(quickWheithingScreenScene);
+            weightingScreen = stage;
         }
         return weightingScreen;
     }

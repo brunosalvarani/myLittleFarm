@@ -5,18 +5,13 @@
  */
 package javafxminiproject;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafxminiproject.utils.Context;
+import javafxminiproject.view.ParentScreenFactory;
+import javafxminiproject.view.ScreenEnum;
 
 /**
  *
@@ -32,41 +27,30 @@ public class MyFirstApplication extends Application {
     }
     
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         if(callLoginScreen()){
             callHomePage(stage);
         }
     }
     
     private void callHomePage(Stage stage){
-        try {
-            Parent homeScreenParent = FXMLLoader.load(getClass().getResource("FXMLHomePage.fxml"));
-            Scene homeScreenScene = new Scene(homeScreenParent);
-            stage.hide();
-            stage.setScene(homeScreenScene);
-            stage.show();
-            stage.setOnCloseRequest(event->Platform.exit());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        Scene homeScreenScene = ParentScreenFactory.getInstance().getParentScreen(ScreenEnum.HOME);
+        stage.hide();
+        stage.setScene(homeScreenScene);
+        stage.show();
+        stage.setOnCloseRequest(event->Platform.exit());
     }
 
     private boolean callLoginScreen() {
-        AnchorPane root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
 
-            Stage dialog = new Stage();
+        Scene loginScreenScene = ParentScreenFactory.getInstance().getParentScreen(ScreenEnum.LOGIN);
+        Stage dialog = new Stage();
 
-            Scene scene = new Scene(root);
-            dialog.setTitle("login");
+        dialog.setTitle("Login");
+        dialog.setScene(loginScreenScene);
+        dialog.showAndWait();
 
-            dialog.setScene(scene);
-            dialog.showAndWait();
-
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLHomePageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return Context.getCurrentUser() != null;
     }
     

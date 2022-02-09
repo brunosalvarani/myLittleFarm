@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="350.0" minWidth="600.0" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxminiproject.FXMLQuickWeightingController">
+<AnchorPane id="AnchorPane" minHeight="350.0" minWidth="600.0" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxminiproject.view.controller.FXMLQuickWeightingController">
    <children>
       <Button layoutX="14.0" layoutY="254.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="174.0" text="Salvar" />
       <Label layoutX="147.0" layoutY="22.0" text="TAG" textAlignment="CENTER">
