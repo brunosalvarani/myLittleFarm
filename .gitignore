@@ -1,0 +1,11 @@
+build
+dist
+nbproject
+.idea
+*.iml
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
