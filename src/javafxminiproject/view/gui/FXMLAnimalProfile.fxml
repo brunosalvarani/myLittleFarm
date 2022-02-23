@@ -15,11 +15,11 @@
 
 <AnchorPane id="AnchorPane" minHeight="700.0" minWidth="900.0" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxminiproject.view.controller.FXMLAnimalProfileController">
    <children>
-      <TextField fx:id="search" alignment="CENTER" layoutX="22.0" layoutY="14.0" opacity="0.9" prefHeight="26.0" prefWidth="250.0" promptText="Busca" />
-      <ListView layoutX="22.0" layoutY="64.0" prefHeight="610.0" prefWidth="250.0" />
+      <TextField fx:id="search" alignment="CENTER" layoutX="22.0" layoutY="14.0" onKeyPressed="#searchAnimal" opacity="0.9" prefHeight="26.0" prefWidth="250.0" promptText="Busca" />
+      <ListView fx:id="lvAnimals" layoutX="22.0" layoutY="64.0" prefHeight="610.0" prefWidth="250.0" />
       <Button fx:id="buttonEditThisAnimal" layoutX="294.0" layoutY="14.0" mnemonicParsing="false" onAction="#editExistingAnimal" text="Editar" />
       <Circle fx:id="image" fill="DODGERBLUE" layoutX="358.0" layoutY="128.0" radius="64.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="374.0" layoutY="18.0" text="TAG" textAlignment="CENTER" />
+      <Label fx:id="tagLabel" layoutX="374.0" layoutY="18.0" text="TAG" textAlignment="CENTER" />
       <TableView layoutX="285.0" layoutY="350.0" prefHeight="324.0" prefWidth="604.0">
          <columns>
             <TableColumn prefWidth="75.0" text="Data" />

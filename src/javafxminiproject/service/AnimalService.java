@@ -4,6 +4,8 @@ import javafxminiproject.model.Animal;
 import javafxminiproject.repository.AnimalRepository;
 import javafxminiproject.service.exception.EntityNotFoundException;
 
+import java.util.List;
+
 public class AnimalService {
 
     private static AnimalService instance;
@@ -32,6 +34,14 @@ public class AnimalService {
             throw new EntityNotFoundException();
         }
         repository.remove(animalId);
+    }
+
+    public Animal findByTag(String tag) {
+        return repository.findByTag(tag);
+    }
+
+    public List<Animal> findAll() {
+        return repository.findAll();
     }
 
     /*
