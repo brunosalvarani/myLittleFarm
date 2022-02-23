@@ -9,21 +9,20 @@ package javafxminiproject.model;
  *
  * @author bruno
  */
+
 public class Animal {
     private int id;
     private String tag;
-    private String parent1;
-    private String parent2;
+    private String parentTag;
     private String birthDate; // seria interessante usar "date" e não "string"
     private String race;
     private boolean isNative;
     private double weight;
 
-    public Animal(int id, String tag, String parent1, String parent2, String birthDate, String race, boolean isNative, double weight) {
+    public Animal(int id, String tag, String parentTag, String birthDate, String race, boolean isNative, double weight) {
         this.id = id;
         this.tag = tag;
-        this.parent1 = parent1;
-        this.parent2 = parent2;
+        this.parentTag = parentTag;
         this.birthDate = birthDate;
         this.race = race;
         this.isNative = isNative;
@@ -46,20 +45,12 @@ public class Animal {
         this.tag = tag;
     }
 
-    public String getParent1() {
-        return parent1;
+    public String getParentTag() {
+        return parentTag;
     }
 
-    public void setParent1(String parent1) {
-        this.parent1 = parent1;
-    }
-
-    public String getParent2() {
-        return parent2;
-    }
-
-    public void setParent2(String parent2) {
-        this.parent2 = parent2;
+    public void setParentTag(String parentTag) {
+        this.parentTag = parentTag;
     }
 
     public String getBirthDate() {
@@ -93,7 +84,18 @@ public class Animal {
     public void setWeight(double weight) {
         this.weight = weight;
     }
-    
-    
-    
+
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "id=" + id +
+                ", tag='" + tag + '\'' +
+                ", parentTag='" + parentTag + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", race='" + race + '\'' +
+                ", isNative=" + isNative +
+                ", weight=" + weight +
+                '}';
+    }
 }
