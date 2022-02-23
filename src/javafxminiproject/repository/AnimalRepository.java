@@ -111,7 +111,7 @@ public class AnimalRepository {
         return animalList;
     }
 
-    public Animal remove(int animal_id) {
+    public void remove(int animalId) {
         Connection connection = ConnectionFactory.getConnection();
         String sql = "DELETE FROM ANIMAL WHERE ANIMAL_ID = ?";
 
@@ -119,27 +119,26 @@ public class AnimalRepository {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, animal_id);
+            preparedStatement.setInt(1, animalId);
 
-            ResultSet result = preparedStatement.executeQuery();
-            animal = AnimalMapper.toSingleModel(result);
+            boolean result = preparedStatement.execute();
+            System.out.println(result);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return animal;
     }
 
-    public Animal findByID(int tag) {
+    public Animal findById(int animalId) {
         Connection connection = ConnectionFactory.getConnection();
-        String sql = "SELECT * FROM ANIMAL WHERE TAG = ?";
+        String sql = "SELECT * FROM ANIMAL WHERE ANIMAL_ID = ?";
 
         Animal animal = null;
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, tag);
+            preparedStatement.setInt(1, animalId);
 
             ResultSet result = preparedStatement.executeQuery();
             animal = AnimalMapper.toSingleModel(result);

@@ -2,6 +2,7 @@ package javafxminiproject.service;
 
 import javafxminiproject.model.Animal;
 import javafxminiproject.repository.AnimalRepository;
+import javafxminiproject.service.exception.EntityNotFoundException;
 
 public class AnimalService {
 
@@ -26,11 +27,11 @@ public class AnimalService {
         return null;
     }
 
-    public Animal removeAnimalByID(int animal_id) {
-        if (repository.remove(animal_id) != null){
-            return repository.findByID(animal_id);
+    public void checkAndRemoveAnimalByID(int animalId) throws EntityNotFoundException {
+        if(repository.findById(animalId) == null){
+            throw new EntityNotFoundException();
         }
-        return null;
+        repository.remove(animalId);
     }
 
     /*

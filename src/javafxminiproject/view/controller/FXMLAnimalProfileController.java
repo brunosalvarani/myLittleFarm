@@ -16,6 +16,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafxminiproject.model.Animal;
 import javafxminiproject.service.AnimalService;
+import javafxminiproject.service.exception.EntityNotFoundException;
 import javafxminiproject.utils.Context;
 
 import java.net.URL;
@@ -28,7 +29,7 @@ import java.util.ResourceBundle;
  */
 public class FXMLAnimalProfileController implements Initializable {
 
-    private AnimalService service = AnimalService.getInstance();
+    private final AnimalService service;
 
     // TODO botões de ADD, Update
     // selected animal.
@@ -72,6 +73,10 @@ public class FXMLAnimalProfileController implements Initializable {
     @FXML
     private Button buttonRemoveThisAnimal;
 
+    public FXMLAnimalProfileController() {
+        service = AnimalService.getInstance();
+    }
+
     @FXML
     void backToMenuPage(ActionEvent event) {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -96,7 +101,11 @@ public class FXMLAnimalProfileController implements Initializable {
 
     @FXML
     void removeExistingAnimal(ActionEvent event) {
-        System.out.println(service.removeAnimalByID(Integer.parseInt(search.getText())).toString());
+        try {
+            service.checkAndRemoveAnimalByID(Integer.parseInt(search.getText()));
+        } catch (EntityNotFoundException e) {
+            // TODO create alert for EntityNotFoundException and other errors;
+        }
     }
 
     @FXML
