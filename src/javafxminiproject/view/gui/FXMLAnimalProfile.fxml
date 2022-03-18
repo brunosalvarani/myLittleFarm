@@ -59,5 +59,6 @@
       </GridPane>
       <Button fx:id="buttonSaveThisAnimal" layoutX="409.0" layoutY="266.0" mnemonicParsing="false" onAction="#addNewAnimal" prefHeight="62.0" prefWidth="63.0" text="Salvar" />
       <Button fx:id="buttonRemoveThisAnimal" layoutX="484.0" layoutY="266.0" mnemonicParsing="false" onAction="#removeExistingAnimal" prefHeight="62.0" prefWidth="63.0" text="remover" />
+      <TextField fx:id="tagTextField" layoutX="349.0" layoutY="15.0" prefHeight="26.0" prefWidth="83.0" />
    </children>
 </AnchorPane>

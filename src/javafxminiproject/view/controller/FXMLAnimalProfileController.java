@@ -45,6 +45,9 @@ public class FXMLAnimalProfileController implements Initializable {
     private TextField search;
 
     @FXML
+    private TextField tagTextField;
+
+    @FXML
     private Label tagLabel;
 
     @FXML
@@ -108,14 +111,16 @@ public class FXMLAnimalProfileController implements Initializable {
 
     @FXML
     void addNewAnimal(ActionEvent event) {
-        Animal animal = new Animal(1, "123", "000", "2000-10-22", "nelore", false, 495.00);
+        Animal animal = new Animal(tagTextField.getText(), mother.getText(), birthDate.getText(), race.getText(), isNative.isSelected(), Double.parseDouble(mostRecentWeighting.getText()));
         System.out.println(service.addAnimal(animal).toString());
+        //TODO insert a textfield for the TAG, so I can stop using the seachbox as an input for the tag.
     }
 
     @FXML
     void removeExistingAnimal(ActionEvent event) {
         try {
-            service.checkAndRemoveAnimalByID(Integer.parseInt(search.getText()));
+            service.checkAndRemoveAnimalByID(Integer.parseInt(tagTextField.getText()));
+            // TODO stop using searchbox as input to remove animal by ID, and start using a proper textfield
         } catch (EntityNotFoundException e) {
             // TODO create alert for EntityNotFoundException and other errors;
         }
@@ -123,7 +128,10 @@ public class FXMLAnimalProfileController implements Initializable {
 
     @FXML
     void editExistingAnimal(ActionEvent event) {
-
+        tagTextField.setVisible(!tagTextField.isVisible());
+        tagTextField.setDisable(!tagTextField.isDisabled());
+        // TODO edit values from x animal, using proper textfields.
+        // TODO disable all fields if edit isn't pressed ( including save, remove )
     }
 
     @FXML
@@ -148,9 +156,9 @@ public class FXMLAnimalProfileController implements Initializable {
             @Override
             public void run() {
                 //TODO search the animal list, for the 'animal.tag'
-                lvAnimals.getSelectionModel().select();
-                lvAnimals.getFocusModel().focus();
-                lvAnimals.scrollTo();
+//                lvAnimals.getSelectionModel().select();
+//                lvAnimals.getFocusModel().focus();
+//                lvAnimals.scrollTo();
 
             }
         });
@@ -192,11 +200,11 @@ public class FXMLAnimalProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        fillListView();
-    }
 
-    //TODO textfield to add new animal TAG:
-    // hide label and show txtfield when add button is pressed.
+        fillListView();
+        tagTextField.setVisible(false);
+        tagTextField.setDisable(true);
+    }
 
     //TODO fix the add function, it is prohibited to add an animal to an already existing tag
 

@@ -11,7 +11,7 @@ package javafxminiproject.model;
  */
 
 public class Animal {
-    private int id;
+    private int animalId;
     private String tag;
     private String parentTag;
     private String birthDate; // seria interessante usar "date" e não "string"
@@ -19,8 +19,7 @@ public class Animal {
     private boolean isNative;
     private double weight;
 
-    public Animal(int id, String tag, String parentTag, String birthDate, String race, boolean isNative, double weight) {
-        this.id = id;
+    public Animal(String tag, String parentTag, String birthDate, String race, boolean isNative, double weight) {
         this.tag = tag;
         this.parentTag = parentTag;
         this.birthDate = birthDate;
@@ -29,12 +28,12 @@ public class Animal {
         this.weight = weight;
     }
 
-    public int getId() {
-        return id;
+    public int getAnimalId() {
+        return animalId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAnimalId(int animalId) {
+        this.animalId = animalId;
     }
 
     public String getTag() {
@@ -89,7 +88,7 @@ public class Animal {
     @Override
     public String toString() {
         return "Animal{" +
-                "id=" + id +
+                "id=" + animalId +
                 ", tag='" + tag + '\'' +
                 ", parentTag='" + parentTag + '\'' +
                 ", birthDate='" + birthDate + '\'' +

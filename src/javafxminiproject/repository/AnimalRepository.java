@@ -65,7 +65,7 @@ public class AnimalRepository {
             preparedStatement.setString(4,animal.getRace());
             preparedStatement.setString(5,animal.isIsNative() ? "Y" : "N");
             preparedStatement.setDouble(6,animal.getWeight());
-            preparedStatement.setInt(7, animal.getId());
+            preparedStatement.setInt(7, animal.getAnimalId());
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {

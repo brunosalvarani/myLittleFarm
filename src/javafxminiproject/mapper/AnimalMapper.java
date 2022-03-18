@@ -13,7 +13,6 @@ public class AnimalMapper {
         List<Animal> modelList = new ArrayList<>();
         while(result.next()){
             Animal animal = new Animal(
-                    result.getInt("ANIMAL_ID"),
                     result.getString("TAG"),
                     result.getString("PARENTTAG"),
                     result.getString("BIRTHDATE"),
