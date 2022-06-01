@@ -27,14 +27,14 @@ public class AnimalService {
             return repository.findByTag(animal.getTag());
         }
         return null;
-    }
+    } // TODO it shouldn't be possible to have two active animals with the same tag
 
     public void checkAndRemoveAnimalByTag(String animalTag) throws EntityNotFoundException {
         if(repository.findByTag(animalTag) == null){
             throw new EntityNotFoundException();
         }
         repository.remove(findByTag(animalTag).getAnimalId());
-    }//TODO findByTag returns animal
+    } //TODO if there is two animals with the same tag, wich one should be removed ?
 
 
     public void checkAndRemoveAnimalByID(int animalId) throws EntityNotFoundException {
@@ -51,9 +51,4 @@ public class AnimalService {
     public List<Animal> findAll() {
         return repository.findAll();
     }
-
-    /*
-        TODO implementar metodos do repository findAll, update
-     */
-
 }

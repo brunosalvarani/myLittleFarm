@@ -113,13 +113,14 @@ public class FXMLAnimalProfileController implements Initializable {
     void addNewAnimal(ActionEvent event) {
         Animal animal = new Animal(tagTextField.getText(), mother.getText(), birthDate.getText(), race.getText(), isNative.isSelected(), Double.parseDouble(mostRecentWeighting.getText()));
         System.out.println(service.addAnimal(animal).toString());
-        //TODO insert a textfield for the TAG, so I can stop using the seachbox as an input for the tag.
+        fillListView();
     }
 
     @FXML
     void removeExistingAnimal(ActionEvent event) {
         try {
-            service.checkAndRemoveAnimalByID(Integer.parseInt(tagTextField.getText()));
+            service.checkAndRemoveAnimalByID(Integer.parseInt(tagTextField.getText())); //TODO change the method ByID -> ByTag
+            fillListView();
         } catch (EntityNotFoundException e) {
             // TODO create alert for EntityNotFoundException and other errors;
         }
@@ -178,11 +179,7 @@ public class FXMLAnimalProfileController implements Initializable {
         } else {
             isNative.setSelected(false);
         }
-        //TODO create a function to fill up the inputs return by the search
     }
-
-    //TODO make listview show all the animals registered in the data base;
-
 
     private void fillListView() {
         List<Animal> animalList = service.findAll();

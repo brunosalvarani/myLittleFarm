@@ -34,5 +34,13 @@ public class User {
         this.password = password;
     }
     
-    
+    /*
+        TODO make a proper login interface and user system.
+        TODO Login should verify username and passwords.
+        TODO Login must have a way to create new "Admin" user, this action must be bound by a "key"
+        TODO "Admin user" can create accounts for their employees.
+        TODO Employee system, where they must have the required access to be allowed to use each and every part of the system.
+        TODO Changes made by employees should be kept in a historyLog.
+
+     */
 }
