@@ -29,6 +29,14 @@ public class AnimalService {
         return null;
     }
 
+    public void checkAndRemoveAnimalByTag(String animalTag) throws EntityNotFoundException {
+        if(repository.findByTag(animalTag) == null){
+            throw new EntityNotFoundException();
+        }
+        repository.remove(findByTag(animalTag).getAnimalId());
+    }//TODO findByTag returns animal
+
+
     public void checkAndRemoveAnimalByID(int animalId) throws EntityNotFoundException {
         if(repository.findById(animalId) == null){
             throw new EntityNotFoundException();

@@ -120,7 +120,6 @@ public class FXMLAnimalProfileController implements Initializable {
     void removeExistingAnimal(ActionEvent event) {
         try {
             service.checkAndRemoveAnimalByID(Integer.parseInt(tagTextField.getText()));
-            // TODO stop using searchbox as input to remove animal by ID, and start using a proper textfield
         } catch (EntityNotFoundException e) {
             // TODO create alert for EntityNotFoundException and other errors;
         }
@@ -128,10 +127,14 @@ public class FXMLAnimalProfileController implements Initializable {
 
     @FXML
     void editExistingAnimal(ActionEvent event) {
+        /* abling and desabling of textfields/buttons/listView when on edit mode */
         tagTextField.setVisible(!tagTextField.isVisible());
         tagTextField.setDisable(!tagTextField.isDisabled());
+        tagLabel.setVisible(!tagTextField.isVisible()); // tagLabel should be visible only when tagTextField isn't
+
+        tagTextField.setText(tagLabel.getText());
         // TODO edit values from x animal, using proper textfields.
-        // TODO disable all fields if edit isn't pressed ( including save, remove )
+        // TODO disable all fields if edit isn't pressed (including buttons save and remove)
     }
 
     @FXML
@@ -163,9 +166,18 @@ public class FXMLAnimalProfileController implements Initializable {
             }
         });
     }
-
+    //TODO fix ui
     private void fillSelectedAnimal(Animal animal){
         tagLabel.setText(animal.getTag());
+        race.setText(animal.getRace());
+        birthDate.setText(animal.getBirthDate());
+        mother.setText(animal.getParentTag());
+        //TODO finish fillSelectedAnimal, weight
+        if(animal.isIsNative()){
+            isNative.setSelected(true);
+        } else {
+            isNative.setSelected(false);
+        }
         //TODO create a function to fill up the inputs return by the search
     }
 

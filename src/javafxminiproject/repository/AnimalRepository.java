@@ -74,6 +74,9 @@ public class AnimalRepository {
         return false;
     }
 
+    /*
+        Find the animal of a Given (String) tag.
+     */
     public Animal findByTag(String tag) {
         Connection connection = ConnectionFactory.getConnection();
         String sql = "SELECT * FROM ANIMAL WHERE TAG = ?";
