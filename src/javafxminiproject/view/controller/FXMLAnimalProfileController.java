@@ -215,7 +215,5 @@ public class FXMLAnimalProfileController implements Initializable {
         tagTextField.setDisable(true);
     }
 
-    //TODO fix the add function, it is prohibited to add an animal to an already existing tag
-
-
+    // TODO implement FXMLAnimalProfile(New Version) and review the code. ( most recent weighting shall be removed ).
 }
