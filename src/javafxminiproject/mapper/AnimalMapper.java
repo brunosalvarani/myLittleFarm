@@ -16,9 +16,9 @@ public class AnimalMapper {
                     result.getString("TAG"),
                     result.getString("PARENTTAG"),
                     result.getString("BIRTHDATE"),
+                    result.getString("GENDER"),
                     result.getString("RACE"),
-                    Converter.stringToBoolean(result.getString("ISNATIVE")),
-                    result.getDouble("WEIGHT"));
+                    Converter.stringToBoolean(result.getString("ISNATIVE")));
             modelList.add(animal);
         }
         return modelList;

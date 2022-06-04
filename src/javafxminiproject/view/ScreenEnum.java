@@ -2,7 +2,7 @@ package javafxminiproject.view;
 
 public enum ScreenEnum {
 
-    ANIMAL_PROFILE("gui/FXMLAnimalProfile.fxml"),
+    ANIMAL_PROFILE("gui/FXMLAnimalProfile(New Version).fxml"),
     HOME("gui/FXMLHomePage.fxml"),
     LOGIN("gui/FXMLLogin.fxml"),
     QUICK_WEIGHTING("gui/FXMLQuickWeighting.fxml");

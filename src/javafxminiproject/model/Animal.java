@@ -16,16 +16,16 @@ public class Animal {
     private String parentTag;
     private String birthDate; // seria interessante usar "date" e não "string"
     private String race;
+    private String gender;
     private boolean isNative;
-    private double weight;
 
-    public Animal(String tag, String parentTag, String birthDate, String race, boolean isNative, double weight) {
+    public Animal(String tag, String parentTag, String birthDate, String race, String gender, boolean isNative) {
         this.tag = tag;
         this.parentTag = parentTag;
         this.birthDate = birthDate;
         this.race = race;
+        this.gender = gender;
         this.isNative = isNative;
-        this.weight = weight;
     }
 
     public int getAnimalId() {
@@ -68,6 +68,10 @@ public class Animal {
         this.race = race;
     }
 
+    public String getGender() { return gender; }
+
+    public void setGender(String gender) { this.gender = gender; }
+
     public boolean isIsNative() {
         return isNative;
     }
@@ -76,15 +80,6 @@ public class Animal {
         this.isNative = isNative;
     }
 
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-
     @Override
     public String toString() {
         return "Animal{" +
@@ -92,9 +87,9 @@ public class Animal {
                 ", tag='" + tag + '\'' +
                 ", parentTag='" + parentTag + '\'' +
                 ", birthDate='" + birthDate + '\'' +
+                ", gender='" + gender + '\'' +
                 ", race='" + race + '\'' +
                 ", isNative=" + isNative +
-                ", weight=" + weight +
                 '}';
     }
 }

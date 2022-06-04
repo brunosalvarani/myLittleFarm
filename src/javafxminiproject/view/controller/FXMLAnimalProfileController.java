@@ -36,6 +36,7 @@ import java.util.ResourceBundle;
 public class FXMLAnimalProfileController implements Initializable {
 
     private final AnimalService service;
+    public Button removeExistingAnimal;
     private Animal selectedAnimal;
 
     // TODO botões de ADD, Update
@@ -64,9 +65,6 @@ public class FXMLAnimalProfileController implements Initializable {
 
     @FXML
     private Button buttonBackToMenuFromAnimalProfile;
-
-    @FXML
-    private TextField mostRecentWeighting;
 
     @FXML
     private TextField race;
@@ -111,7 +109,7 @@ public class FXMLAnimalProfileController implements Initializable {
 
     @FXML
     void addNewAnimal(ActionEvent event) {
-        Animal animal = new Animal(tagTextField.getText(), mother.getText(), birthDate.getText(), race.getText(), isNative.isSelected(), Double.parseDouble(mostRecentWeighting.getText()));
+        Animal animal = new Animal(tagTextField.getText(), mother.getText(), birthDate.getText(), race.getText(), gender.getText(), isNative.isSelected());
         System.out.println(service.addAnimal(animal).toString());
         fillListView();
     }
@@ -173,12 +171,9 @@ public class FXMLAnimalProfileController implements Initializable {
         race.setText(animal.getRace());
         birthDate.setText(animal.getBirthDate());
         mother.setText(animal.getParentTag());
+        isNative.setSelected(animal.isIsNative());
+        gender.setText(animal.getGender());
         //TODO finish fillSelectedAnimal, weight
-        if(animal.isIsNative()){
-            isNative.setSelected(true);
-        } else {
-            isNative.setSelected(false);
-        }
     }
 
     private void fillListView() {

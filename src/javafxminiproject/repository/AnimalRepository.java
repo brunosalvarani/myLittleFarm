@@ -34,16 +34,16 @@ public class AnimalRepository {
     public boolean create(Animal animal) {
 
         Connection connection = ConnectionFactory.getConnection();
-        String sql = "INSERT INTO ANIMAL(TAG, PARENTTAG, BIRTHDATE, RACE, ISNATIVE, WEIGHT) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO ANIMAL(TAG, PARENTTAG, BIRTHDATE, GENDER, RACE, ISNATIVE) VALUES(?,?,?,?,?,?)";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,animal.getTag());
             preparedStatement.setString(2,animal.getParentTag());
             preparedStatement.setDate(3, Converter.stringToDate(animal.getBirthDate()));
-            preparedStatement.setString(4,animal.getRace());
-            preparedStatement.setString(5,animal.isIsNative() ? "Y" : "N");
-            preparedStatement.setDouble(6,animal.getWeight());
+            preparedStatement.setString(4, animal.getGender());
+            preparedStatement.setString(5,animal.getRace());
+            preparedStatement.setString(6,animal.isIsNative() ? "Y" : "N");
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
@@ -55,16 +55,16 @@ public class AnimalRepository {
     public boolean update(Animal animal) {
 
         Connection connection = ConnectionFactory.getConnection();
-        String sql = "UPDATE ANIMAL SET TAG = ?, PARENTTAG = ?, BIRTHDATE = ?, RACE = ?, ISNATIVE = ?, WEIGHT = ? WHERE ANIMAL_ID = ?";
+        String sql = "UPDATE ANIMAL SET TAG = ?, PARENTTAG = ?, BIRTHDATE = ?, GENDER = ?, RACE = ?, ISNATIVE = ? WHERE ANIMAL_ID = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,animal.getTag());
             preparedStatement.setString(2,animal.getParentTag());
             preparedStatement.setDate(3, Converter.stringToDate(animal.getBirthDate()));
-            preparedStatement.setString(4,animal.getRace());
-            preparedStatement.setString(5,animal.isIsNative() ? "Y" : "N");
-            preparedStatement.setDouble(6,animal.getWeight());
+            preparedStatement.setString(4, animal.getGender());
+            preparedStatement.setString(5,animal.getRace());
+            preparedStatement.setString(6,animal.isIsNative() ? "Y" : "N");
             preparedStatement.setInt(7, animal.getAnimalId());
             preparedStatement.execute();
             return true;
@@ -118,7 +118,7 @@ public class AnimalRepository {
         Connection connection = ConnectionFactory.getConnection();
         String sql = "DELETE FROM ANIMAL WHERE ANIMAL_ID = ?";
 
-        Animal animal = null;
+//        Animal animal = null; // never used ? of there is no need, should be removed
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
