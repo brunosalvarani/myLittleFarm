@@ -87,6 +87,9 @@ public class FXMLAnimalProfileController implements Initializable {
     @FXML
     private Button buttonRemoveThisAnimal;
 
+    @FXML
+    private TableView<?> tableView;
+
     public FXMLAnimalProfileController() {
         service = AnimalService.getInstance();
     }
