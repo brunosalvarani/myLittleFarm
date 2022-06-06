@@ -5,6 +5,8 @@
  */
 package main.java.javafxminiproject.model;
 
+import java.util.Objects;
+
 /**
  *
  * @author bruno
@@ -91,5 +93,19 @@ public class Animal {
                 ", race='" + race + '\'' +
                 ", isNative=" + isNative +
                 '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Animal)) return false;
+        Animal animal = (Animal) o;
+        return getAnimalId() == animal.getAnimalId() && isNative == animal.isNative && getTag().equals(animal.getTag()) && Objects.equals(getParentTag(), animal.getParentTag()) && Objects.equals(getBirthDate(), animal.getBirthDate()) && Objects.equals(getRace(), animal.getRace()) && Objects.equals(getGender(), animal.getGender());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(animalId, tag, parentTag, birthDate, race, gender, isNative);
     }
 }
