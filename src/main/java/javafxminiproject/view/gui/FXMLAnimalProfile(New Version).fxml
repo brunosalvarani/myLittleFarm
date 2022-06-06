@@ -92,7 +92,7 @@
             </BorderPane>
          </top>
          <center>
-            <TableView focusTraversable="false" prefHeight="324.0" prefWidth="604.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableView" focusTraversable="false" prefHeight="324.0" prefWidth="604.0" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn prefWidth="75.0" text="Data" />
                   <TableColumn prefWidth="75.0" text="Peso" />
