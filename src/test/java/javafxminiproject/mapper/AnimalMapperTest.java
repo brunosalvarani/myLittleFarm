@@ -11,7 +11,7 @@ import java.util.List;
 
 class AnimalMapperTest {
 
-    public static void callTests() {
+    public void callTests() {
         try {
             testToModelList();
         } catch (SQLException e) {
@@ -19,20 +19,27 @@ class AnimalMapperTest {
         }
     }
 
+    /*
+        It isn't good practice to Test static methods, so I made it non-static
+        not sure if this is beneficial or not tho ...
+     */
     @Test
-    public static void testToModelList() throws SQLException {
+    public void testToModelList() throws SQLException {
         ResultSet rs = MockResultSet.create(
-                new String[] { "TAG", "PARENTTAG", }, //TODO substituir com colunas do banco
+                new String[] { "TAG", "PARENTTAG", "BIRTHDATE", "GENDER", "RACE", "ISNATIVE"},
                 new Object[][] { // data
-                        { "123",null, "2000-10-22", "F", "Cow", false },
-                        { "124","123", "1999-10-21", "M", "BigCow", true }
+                        { "123", null, "2000-10-22", "F", "Cow", "N" },
+                        { "124","123", "1999-10-21", "M", "BigCow", "Y" }
                 });
 
         List<Animal> animalList = AnimalMapper.toModelList(rs);
 
-        Animal expectedAnimal = new Animal("123",null, "2000-10-22", "F", "Cow", false);
+        Animal expectedAnimal0 = new Animal("123",null, "2000-10-22", "F", "Cow", false);
+        Animal expectedAnimal1 = new Animal("124","123", "1999-10-21", "M", "BigCow", true);
 
-        Assert.assertEquals(0,animalList.size());
-        Assert.assertEquals(expectedAnimal, animalList.get(0));
+        Assert.assertEquals(2,animalList.size());
+        Assert.assertEquals(expectedAnimal0, animalList.get(0));
+        Assert.assertEquals(expectedAnimal1, animalList.get(1));
+
     }
 }

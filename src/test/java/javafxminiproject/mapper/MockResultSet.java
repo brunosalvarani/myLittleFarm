@@ -47,7 +47,7 @@ public class MockResultSet {
         doAnswer(invocation -> {
             final String columnName = invocation.getArgumentAt(0, String.class);
             final Integer columnIndex = columnIndices.get(columnName);
-            return (String) data[rowIndex][columnIndex];
+            return data[rowIndex][columnIndex];
         }).when(rs).getString(anyString());
 
         // mock rs.getObject(columnIndex)
