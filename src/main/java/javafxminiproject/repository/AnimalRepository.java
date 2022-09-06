@@ -98,7 +98,7 @@ public class AnimalRepository {
 
     public List<Animal> findAll() {
         Connection connection = ConnectionFactory.getConnection();
-        String sql = "SELECT * FROM ANIMAL";
+        String sql = "SELECT * FROM ANIMAL ORDER BY LENGTH(TAG), TAG";
 
         List<Animal> animalList = new ArrayList<>();
 
@@ -151,6 +151,4 @@ public class AnimalRepository {
         }
         return animal;
     }
-
-    //TODO implement update method
 }

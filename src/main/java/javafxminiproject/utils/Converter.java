@@ -27,4 +27,13 @@ public class Converter {
         return "Y".equals(strBoolean);
     }
 
+    public static double stringToDouble(String strDouble){
+        return Double.parseDouble(strDouble);
+    }
+
+    public static Date dateFromDatePickerToSqlDate(String datePicker){
+        String sqlDate = datePicker.substring(6) + "-" + datePicker.substring(3,4) + "-" + datePicker.substring(0,1);
+        return stringToDate(sqlDate);
+    }
+
 }

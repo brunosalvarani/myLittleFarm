@@ -21,6 +21,8 @@ public class Animal {
     private String gender;
     private boolean isNative;
 
+    public Animal(){}
+
     public Animal(String tag, String parentTag, String birthDate, String gender, String race, boolean isNative) {
         this.tag = tag;
         this.parentTag = parentTag;
@@ -30,6 +32,19 @@ public class Animal {
         this.isNative = isNative;
     }
 
+ /*
+    Used by checkAndRemoveAnimalByTag ( the Animal created had the need to be initialized with the ID
+    corresponding to its ANIMAL_ID in the DataBase
+  */
+    public Animal(int animalId, String tag, String parentTag, String birthDate, String gender, String race, boolean isNative) {
+        this.animalId = animalId;
+        this.tag = tag;
+        this.parentTag = parentTag;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.race = race;
+        this.isNative = isNative;
+    }
     public int getAnimalId() {
         return animalId;
     }

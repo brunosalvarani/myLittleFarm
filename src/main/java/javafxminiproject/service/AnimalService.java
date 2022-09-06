@@ -21,19 +21,26 @@ public class AnimalService {
         return instance;
     }
 
+    public Animal updateAnimal(Animal animal){
+        if(repository.update(animal)) {
+            return repository.findById(animal.getAnimalId());
+        }
+        return null;
+    }
 
     public Animal addAnimal (Animal animal) {
-        if (repository.create(animal)) {
+        if(repository.create(animal)) {
             return repository.findByTag(animal.getTag());
         }
         return null;
     } // TODO it shouldn't be possible to have two active animals with the same tag
 
     public void checkAndRemoveAnimalByTag(String animalTag) throws EntityNotFoundException {
-        if(repository.findByTag(animalTag) == null){
+        Animal toBeRemoved = repository.findByTag(animalTag);
+        if(toBeRemoved == null){
             throw new EntityNotFoundException();
         }
-        repository.remove(findByTag(animalTag).getAnimalId());
+        repository.remove(toBeRemoved.getAnimalId());
     } //TODO if there is two animals with the same tag, wich one should be removed ?
 
 
