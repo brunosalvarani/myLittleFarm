@@ -20,16 +20,12 @@ public class AnimalRepository {
 
     private static AnimalRepository instance;
 
-    private AnimalRepository () {}
-
     public static AnimalRepository getInstance(){
         if (instance == null) {
             instance = new AnimalRepository();
         }
         return instance;
     }
-
-
 
     public boolean create(Animal animal) {
 

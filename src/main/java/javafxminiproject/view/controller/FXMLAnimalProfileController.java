@@ -15,12 +15,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.java.javafxminiproject.model.Animal;
+import main.java.javafxminiproject.model.CheckUp;
 import main.java.javafxminiproject.service.AnimalService;
+import main.java.javafxminiproject.service.CheckUpService;
 import main.java.javafxminiproject.service.exception.EntityNotFoundException;
 import main.java.javafxminiproject.utils.Context;
 
@@ -92,7 +95,27 @@ public class FXMLAnimalProfileController implements Initializable {
     private Button buttonRemoveThisAnimal;
 
     @FXML
-    private TableView<?> tableView;
+    private Button showMoreButton;
+
+    @FXML
+    private TableView<CheckUp> tableView;
+
+    @FXML
+    private TableColumn<CheckUp, Integer> tableColumnCheckUpId;
+
+    @FXML
+    private TableColumn<CheckUp, Double> tableColumnWeigh;
+
+    @FXML
+    private TableColumn<CheckUp, String> tableColumnArea;
+
+    @FXML
+    private TableColumn<CheckUp, String> tableColumnDate;
+
+    @FXML
+    private TableColumn<CheckUp, String> tableColumnDescription;
+
+
 
     private boolean isEditing;
 
@@ -110,15 +133,15 @@ public class FXMLAnimalProfileController implements Initializable {
     }
 
     @FXML
-    void openWeightingPage(ActionEvent event) {
-        Stage weightingScreen = Context.getWeightingScreen();
-        if (weightingScreen.isShowing()) {
-            weightingScreen.centerOnScreen();
-            weightingScreen.toFront();
+    void openWeighingPage(ActionEvent event) {
+        Stage weighingScreen = Context.getWeighingScreen();
+        if (weighingScreen.isShowing()) {
+            weighingScreen.centerOnScreen();
+            weighingScreen.toFront();
         } else {
             FXMLCheckUpController checkUpControllerInstance = FXMLCheckUpController.getInstance();
 //            checkUpControllerInstance.fillFieldsOnCheckUpPage(tagLabel.getText());
-            weightingScreen.show();
+            weighingScreen.show();
         }
     }
 
@@ -202,6 +225,11 @@ public class FXMLAnimalProfileController implements Initializable {
      */
 
     @FXML
+    public void showMoreButtonClicked(ActionEvent event){
+        setTableView();
+    }
+
+    @FXML
     public void onEditButtonClicked(ActionEvent event){
         if (!isEditing){ // edit mode disabled
             enableEditMode();
@@ -209,6 +237,8 @@ public class FXMLAnimalProfileController implements Initializable {
             disableEditMode();
         }
     }
+
+    CheckUpService checkUpServiceInstance = CheckUpService.getInstance();
 
     private void enableEditMode() {
 
@@ -326,6 +356,7 @@ public class FXMLAnimalProfileController implements Initializable {
                 selectedAnimal = newValue;
                 fillFieldsWithSelectedAnimalData(selectedAnimal);
                 disableEditMode();
+                setTableView();
             }
         });
     }
@@ -339,6 +370,21 @@ public class FXMLAnimalProfileController implements Initializable {
                 genderTextField.getText(),
                 raceTextField.getText(),
                 isNative.isSelected());
+    }
+
+    private void setTableView(){
+        List<CheckUp> checkUpList = checkUpServiceInstance.getCheckUpsFromSelectedAnimal(tagTextField.getText(),
+                tableView.getItems().size());
+
+        tableColumnCheckUpId.setCellValueFactory(new PropertyValueFactory<CheckUp, Integer>("checkUpID"));
+        tableColumnWeigh.setCellValueFactory(new PropertyValueFactory<CheckUp, Double>("weigh"));
+        tableColumnArea.setCellValueFactory(new PropertyValueFactory<CheckUp, String>("designatedArea"));
+        tableColumnDate.setCellValueFactory(new PropertyValueFactory<CheckUp, String>("dateOfCheckUp"));
+        tableColumnDescription.setCellValueFactory(new PropertyValueFactory<CheckUp, String>("description"));
+
+        ObservableList<CheckUp> observableList = FXCollections.observableArrayList(checkUpList);
+
+        tableView.setItems(observableList);
     }
 
     @Override

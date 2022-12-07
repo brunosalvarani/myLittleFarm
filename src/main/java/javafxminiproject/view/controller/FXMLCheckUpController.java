@@ -7,18 +7,11 @@ package main.java.javafxminiproject.view.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import main.java.javafxminiproject.model.CheckUp;
 import main.java.javafxminiproject.service.CheckUpService;
-import main.java.javafxminiproject.utils.Context;
-import main.java.javafxminiproject.utils.Converter;
-import main.java.javafxminiproject.view.ScreenEnum;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -62,13 +55,12 @@ public class FXMLCheckUpController implements Initializable {
 
         CheckUpService instance = CheckUpService.getInstance();
 
-        CheckUp checkUp = new CheckUp(tagTextField.getText(),
-                Converter.stringToDouble(textfieldWeigh.getText()),
+        CheckUp checkUp = new CheckUp(Double.parseDouble(textfieldWeigh.getText()),
                 choiceBoxDesignatedArea.getSelectionModel().getSelectedItem(),
                 datePicker.getValue().toString(),
                 textArea.getText());
 
-        instance.passCheckUpToRepository(checkUp);
+        instance.passCheckUpToRepository(checkUp, tagTextField.getText());
 
         if (!checkBox.isSelected()){
             Stage stage = (Stage) buttonSave.getScene().getWindow();
@@ -89,6 +81,7 @@ public class FXMLCheckUpController implements Initializable {
     }
 
     public void fillFieldsOnCheckUpPage(String tag){
+        //TODO make this method work.
         tagTextField.setText(tag);
         textfieldWeigh.setText(null);
         textArea.setText(null);

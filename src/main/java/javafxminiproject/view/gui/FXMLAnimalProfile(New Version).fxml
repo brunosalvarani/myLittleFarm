@@ -25,19 +25,20 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <top>
-            <BorderPane prefHeight="345.0" prefWidth="610.0" BorderPane.alignment="CENTER">
+            <BorderPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="345.0" prefWidth="610.0" BorderPane.alignment="CENTER">
                <top>
-                   <GridPane prefHeight="34.0" prefWidth="211.0" BorderPane.alignment="CENTER">
+                   <GridPane alignment="CENTER" prefHeight="34.0" prefWidth="211.0" BorderPane.alignment="CENTER">
                        <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                        </columnConstraints>
                        <rowConstraints>
                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                        </rowConstraints>
-                       <Button fx:id="buttonEditThisAnimal" mnemonicParsing="false" onAction="#editExistingAnimal" text="Edit Profile" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                       <TextField fx:id="tagTextField" alignment="CENTER" focusTraversable="false" promptText="TAG" GridPane.columnIndex="1" />
-                       <Label fx:id="tagLabel" contentDisplay="CENTER" text="TAG" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                       <Button fx:id="buttonEditThisAnimal" mnemonicParsing="false" onAction="#onEditButtonClicked" prefHeight="30.0" prefWidth="190.0" text="Edit" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                       <TextField fx:id="tagTextField" alignment="CENTER" focusTraversable="false" promptText="TAG" GridPane.columnIndex="2" />
+                       <Label fx:id="tagLabel" contentDisplay="CENTER" text="TAG" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                           <GridPane.margin>
                               <Insets />
                           </GridPane.margin>
@@ -56,13 +57,17 @@
                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                        </rowConstraints>
                        <Button fx:id="buttonBackToMenuFromAnimalProfile" mnemonicParsing="false" onAction="#backToMenuPage" prefHeight="50.0" prefWidth="145.0" text="Menu" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                       <Button fx:id="buttonSaveThisAnimal" mnemonicParsing="false" onAction="#addNewAnimal" prefHeight="50.0" prefWidth="145.0" text="Save" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                       <Button fx:id="buttonSaveThisAnimal" disable="true" focusTraversable="false" mnemonicParsing="false" onAction="#onSaveButtonClicked" prefHeight="50.0" prefWidth="145.0" text="Save" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                     <Button fx:id="addNewAnimalButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onAddButtonClicked" prefHeight="50.0" prefWidth="145.0" text="Add" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                        <Button fx:id="removeExistingAnimal" mnemonicParsing="false" onAction="#removeExistingAnimal" prefHeight="50.0" prefWidth="145.0" text="Remove" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                       <Button fx:id="buttonWeighting" mnemonicParsing="false" onAction="#openWeightingPage" prefHeight="50.0" prefWidth="145.0" text="Weight" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                       <Button fx:id="buttonWeighing" mnemonicParsing="false" onAction="#openWeighingPage" prefHeight="50.0" prefWidth="145.0" text="Weigh" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                    </GridPane>
                </bottom>
-               <right>
-                   <GridPane prefHeight="208.0" prefWidth="297.0" BorderPane.alignment="CENTER">
+               <left>
+                  <Circle fx:id="image" fill="#f173ff" radius="97.0" stroke="BLACK" strokeType="INSIDE" BorderPane.alignment="CENTER" />
+               </left>
+               <center>
+                   <GridPane alignment="CENTER" prefHeight="208.0" prefWidth="351.0" BorderPane.alignment="CENTER">
                        <columnConstraints>
                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -79,28 +84,29 @@
                        <Label alignment="CENTER" contentDisplay="CENTER" text="Gender  " textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                        <Label alignment="CENTER" contentDisplay="CENTER" text="Race  " textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                        <Label alignment="CENTER" contentDisplay="CENTER" text="Native  " textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                       <CheckBox fx:id="isNative" mnemonicParsing="false" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                       <TextField fx:id="mother" alignment="CENTER" promptText="Parent Tag" GridPane.columnIndex="1" />
-                       <TextField fx:id="birthDate" alignment="CENTER" promptText="yyyy-mm-dd" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                       <TextField fx:id="gender" alignment="CENTER" promptText="Gender" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                       <TextField fx:id="race" alignment="CENTER" promptText="Race" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                       <TextField fx:id="parentTagTextField" alignment="CENTER" promptText="Parent Tag" GridPane.columnIndex="1" />
+                       <TextField fx:id="dateOfBirthTextField" alignment="CENTER" promptText="yyyy-mm-dd" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                       <TextField fx:id="genderTextField" alignment="CENTER" promptText="Gender" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                       <TextField fx:id="raceTextField" alignment="CENTER" promptText="Race" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                       <CheckBox fx:id="isNative" mnemonicParsing="false" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
                    </GridPane>
-               </right>
-               <center>
-                  <Circle fx:id="image" fill="#f173ff" radius="100.0" stroke="BLACK" strokeType="INSIDE" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
          </top>
          <center>
-            <TableView fx:id="tableView" focusTraversable="false" prefHeight="324.0" prefWidth="604.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableView" focusTraversable="false" maxHeight="350.0" maxWidth="600.0" prefHeight="350.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <columns>
-                  <TableColumn prefWidth="75.0" text="Data" />
-                  <TableColumn prefWidth="75.0" text="Peso" />
-                  <TableColumn prefWidth="75.0" text="Pasto" />
-                  <TableColumn prefWidth="377.5999755859375" text="Descrição" />
+                  <TableColumn fx:id="tableColumnCheckUpId" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="tableColumnWeigh" prefWidth="75.0" text="Weigh" />
+                  <TableColumn fx:id="tableColumnArea" prefWidth="75.0" text="Area" />
+                  <TableColumn fx:id="tableColumnDate" prefWidth="112.80000305175781" text="Date" />
+                  <TableColumn fx:id="tableColumnDescription" maxWidth="330.0" prefWidth="330.0" text="Description" />
                </columns>
             </TableView>
          </center>
+         <bottom>
+            <Button fx:id="showMoreButton" mnemonicParsing="false" onAction="#showMoreButtonClicked" prefHeight="30.0" prefWidth="190.0" text="Show More" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+         </bottom>
       </BorderPane>
    </center>
 </BorderPane>

@@ -25,7 +25,7 @@ public class AnimalMapper { // TODO create a test
         return modelList;
     }
 
-    public static Animal toSingleModel (ResultSet result) throws SQLException {
+    public static Animal toSingleModel(ResultSet result) throws SQLException {
         List<Animal> animalList = toModelList(result);
         if(!animalList.isEmpty()){
             return animalList.get(0);

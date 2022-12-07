@@ -20,7 +20,7 @@ public class Context {
     
     private static Stage weightingScreen;
 
-    public static Stage getWeightingScreen() {
+    public static Stage getWeighingScreen() {
         if(weightingScreen==null){
             Scene quickWheithingScreenScene = ParentScreenFactory.getInstance().getParentScreen(ScreenEnum.QUICK_WEIGHTING);
 

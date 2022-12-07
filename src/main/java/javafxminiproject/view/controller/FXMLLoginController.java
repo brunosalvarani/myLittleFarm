@@ -16,11 +16,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import main.java.javafxminiproject.model.User;
+import main.java.javafxminiproject.service.LoginService;
 import main.java.javafxminiproject.utils.Context;
+import main.java.javafxminiproject.view.ParentScreenFactory;
+import main.java.javafxminiproject.view.ScreenEnum;
 
 /**
  * FXML Controller class
@@ -28,35 +33,48 @@ import main.java.javafxminiproject.utils.Context;
  * @author bruno
  */
 public class FXMLLoginController implements Initializable {
+    private LoginService serviceInstance = new LoginService().getInstance();
 
     @FXML
-    private TextField userTextField;
-
-    @FXML
-    private Button loginButton;
+    private TextField usernameTextField;
 
     @FXML
     private PasswordField passwordTextField;
 
     @FXML
-    void login(ActionEvent event) {
-        if(userTextField.getText().equals("bruno")){
-            if(passwordTextField.getText().equals("123")){
-                Context.setCurrentUser(new User(userTextField.getText(), passwordTextField.getText()));
-                System.out.println("Login efetuado");  
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                stage.close();
-            } else {
-                System.out.println("Senha incorreta");
-            }
-        } else {
-            System.out.println("Usuário não encontrado");
-        }
+    private Button loginButton;
+
+    @FXML
+    private Button newAccountButton;
+
+    @FXML
+    private CheckBox saveUserCheckBox;
+
+    @FXML
+    void changeCheckBoxState(KeyEvent event) {
+
     }
-    
+
+    @FXML
+    void login(KeyEvent event) {
+        User user = new User(usernameTextField.getText(), passwordTextField.getText());
+        if (serviceInstance.validateLogin(user) != 0){
+
+        } else {
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            Scene animalHomePageScreenScene = ParentScreenFactory.getInstance().getParentScreen(ScreenEnum.HOME);
+            stage.close();
+
+            Stage dialog = new Stage();
+            dialog.setTitle("Home Page");
+            dialog.setScene(animalHomePageScreenScene);
+            dialog.show();
+        }
+
+    }
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 }
