@@ -17,7 +17,7 @@ public class LoginService {
     public int validateLogin(User user){
         User userFromRepository = repositoryInstance.getUser(user.getUsername());
         if (userFromRepository != null){
-            if (user.getPassword() == userFromRepository.getPassword()){
+            if (user.getPassword().equals(userFromRepository.getPassword())){
                 return 0;
             }
             return -1;

@@ -12,8 +12,8 @@ import java.util.List;
 public class CheckUpService {
 
     private static CheckUpService instance;
-    private CheckUpRepository repository;
-    private AnimalService animalService = AnimalService.getInstance();
+    private CheckUpRepository repository = CheckUpRepository.getInstance();
+        private AnimalService animalService = AnimalService.getInstance();
 
     public static CheckUpService getInstance(){
         if (instance == null) {
@@ -27,9 +27,7 @@ public class CheckUpService {
     public boolean passCheckUpToRepository(CheckUp checkUp, String animalTag){
         Animal animal = animalService.findByTag(animalTag);
         if (animal != null){
-            if (repository.saveCheckUp(checkUp, animal.getAnimalId())) {
-                return true;
-            }
+            return repository.saveCheckUp(checkUp, animal.getAnimalId());
         }
         return false;
     }
@@ -37,8 +35,7 @@ public class CheckUpService {
     public List<CheckUp> getCheckUpsFromSelectedAnimal(String animalTag, int numberOfCheckUpsBeeingShown){
         ResultSet checkUps = repository.getTenCheckUpFromSelectedAnimal(animalService.findByTag(animalTag).getAnimalId(), numberOfCheckUpsBeeingShown);
         try {
-            List<CheckUp> mappedCheckUps = CheckUpMapper.toModelListWithId(checkUps, animalTag);
-            return mappedCheckUps;
+            return CheckUpMapper.toModelListWithId(checkUps, animalTag);
         } catch (SQLException e) {
             e.printStackTrace();
         }

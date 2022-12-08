@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import main.java.javafxminiproject.model.User;
@@ -57,20 +58,22 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     void login(KeyEvent event) {
-        User user = new User(usernameTextField.getText(), passwordTextField.getText());
-        if (serviceInstance.validateLogin(user) != 0){
 
-        } else {
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            Scene animalHomePageScreenScene = ParentScreenFactory.getInstance().getParentScreen(ScreenEnum.HOME);
-            stage.close();
+        if (event.getCode() == KeyCode.ENTER){
+            User user = new User(usernameTextField.getText(), passwordTextField.getText());
+            if (serviceInstance.validateLogin(user) != 0){
 
-            Stage dialog = new Stage();
-            dialog.setTitle("Home Page");
-            dialog.setScene(animalHomePageScreenScene);
-            dialog.show();
+            } else {
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                Scene animalHomePageScreenScene = ParentScreenFactory.getInstance().getParentScreen(ScreenEnum.HOME);
+                stage.close();
+
+                Stage dialog = new Stage();
+                dialog.setTitle("Home Page");
+                dialog.setScene(animalHomePageScreenScene);
+                dialog.show();
+            }
         }
-
     }
 
     @Override
